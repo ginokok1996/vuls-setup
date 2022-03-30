@@ -6,4 +6,13 @@
   hosts: all
 
   roles:
+
     - role: docker_installer
+      tags:
+        - docker-install
+        - global-install
+
+    - role: vuls_install
+      tags:
+        - vuls-install
+        - global-instal

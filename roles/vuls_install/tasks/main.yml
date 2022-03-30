@@ -1,0 +1,16 @@
+---
+
+  # Make sure we have git installed
+  - name: Install git
+    apt:
+      name: 
+        - git
+      state: latest
+    become: true
+
+  # Clone the vuls repo
+  - name: clone vuls repository
+    git:
+      repo: "https://github.com/vulsio/vulsctl.git"
+      dest: $HOME/vulsctl
+...
