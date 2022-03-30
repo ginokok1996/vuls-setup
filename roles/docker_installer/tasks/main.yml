@@ -8,6 +8,7 @@
         - python3
         - python3-pip
       state: latest
+    become: true
 
 # You can use shell to run other executables to perform actions inline
   - name: Install docker
