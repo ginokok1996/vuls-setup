@@ -15,6 +15,6 @@
       dest: $HOME/vulsctl
 
   - name: update scan.sh
-    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulctl/docker/scan.sh
+    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/scan.sh
 
 ...
