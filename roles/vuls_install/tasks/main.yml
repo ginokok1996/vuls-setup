@@ -13,6 +13,7 @@
     git:
       repo: "https://github.com/vulsio/vulsctl.git"
       dest: $HOME/vulsctl
+      force: yes
 
   - name: update scripts
     shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
