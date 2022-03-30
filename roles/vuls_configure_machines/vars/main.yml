@@ -2,6 +2,11 @@
 
 machines: |
   [servers]
+  [servers.ubuntu]
+  host        = "20.105.164.110"
+  port        = "22"
+  user        = "ubuntu"
+  keyPath     = "/root/.ssh/id_rsa"
   [servers.ubuntu2]
   host        = "20.105.164.110"
   port        = "22"
