@@ -18,4 +18,12 @@
   - name: scan hosts
     shell: sh ~/vulsctl/docker/scan.sh {{ item }}
     with_items: "{{ hostnames.stdout_lines }}"
+
+
+  - name: Fetch OVAL DB
+    shell: sh ~/vulsctl/docker/oval.sh --ubuntu
+
+  - name: Create report
+    shell: sh ~/vulsctl/docker/report.sh
+
 ... 
