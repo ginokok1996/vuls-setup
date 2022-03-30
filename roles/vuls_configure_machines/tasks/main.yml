@@ -4,5 +4,5 @@
   - name: Copy hosts to config file
     copy: 
       content: "{{ machines }}"
-      dest: $HOME/vulsctl/docker/conf.toml
-...
+      dest: $HOME/vulsctl/docker/config.toml
+... 
