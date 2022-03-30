@@ -13,5 +13,5 @@
   - name: test
     debug:
       msg: "An item: {{ item }}"
-    with_items: "{{ hostnames }}"
+    with_items: "{{ hostnames.stdout_lines }}"
 ... 
