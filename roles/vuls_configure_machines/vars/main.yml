@@ -1,6 +1,6 @@
 ---
 
-hosts: |
+machines: |
   [servers]
   [servers.ubuntu2]
   host        = "20.105.164.110"
