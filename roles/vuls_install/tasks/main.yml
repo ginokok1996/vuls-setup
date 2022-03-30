@@ -17,4 +17,6 @@
   - name: update scan.sh
     shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/scan.sh
 
+  - name: update report.sh
+    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/report.sh
 ...
