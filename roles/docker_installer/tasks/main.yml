@@ -46,4 +46,17 @@
   - name: Install Docker SDK
     pip:
       name: docker
+
+  # Add user to the docker group
+  - name: Add user to the docker group
+    become: true
+    user:
+        name: "ubuntu"
+        groups: docker
+        append: yes
+
+  # Reset ssh connection to be able to use the group
+  - name: reset ssh connection to allow user changes to affect the user
+    meta:
+      reset_connection
 ...
