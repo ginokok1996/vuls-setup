@@ -11,6 +11,5 @@
     register: hostnames
 
   - name: test
-    shell: echo {{ item }}
-    with_items: hostnames
+    debug: hostnames
 ... 
