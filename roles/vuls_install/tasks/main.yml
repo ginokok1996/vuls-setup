@@ -14,9 +14,8 @@
       repo: "https://github.com/vulsio/vulsctl.git"
       dest: $HOME/vulsctl
 
-  - name: update scan.sh
-    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/scan.sh
+  - name: update scripts
+    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
+    with_items: [ 'scan.sh', 'report.sh', 'oval.sh' ]
 
-  - name: update report.sh
-    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/report.sh
 ...
