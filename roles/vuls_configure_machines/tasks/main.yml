@@ -5,4 +5,12 @@
     copy: 
       content: "{{ machines }}"
       dest: $HOME/vulsctl/docker/config.toml
+
+  - name: retrieve hosts
+    shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
+    register: hostnames
+
+  - name: test
+    shell: echo {{ item }}
+    with_items: hostnames
 ... 
