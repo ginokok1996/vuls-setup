@@ -14,7 +14,7 @@
 
     # Add docker gpg key
   - name: Add docker gpg key
-    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --batch --yes -o /usr/share/keyrings/docker-archive-keyring.gpg"
 
     # Set up stable docker repository
   - name: Set up stable docker repository
@@ -31,7 +31,7 @@
         - curl
         - gnupg
         - lsb-release
-      update_cache: yes
+      update_cache: 
       state: latest
     become: true
 
