@@ -34,14 +34,6 @@
       update_cache: 
       state: latest
     become: true
-
-  # Retrieves the docker version
-  - name: get docker version
-    shell: "docker -v"
-    register: version
-
-  # Prints out the installed docker version
-  - debug: var=version.stdout
   
   # Starts the docker service and enables docker on boot
   - name: Start Docker service
