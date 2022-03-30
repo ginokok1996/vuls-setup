@@ -14,6 +14,6 @@
     command: chdir=~/vulsctl/docker/ ls
 
   - name: scan hosts
-    shell: ./scan.sh {{ item }}
+    shell: sh ~/vulsctl/docker/scan.sh {{ item }}
     with_items: "{{ hostnames.stdout_lines }}"
 ... 
