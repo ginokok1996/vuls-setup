@@ -10,8 +10,7 @@
     shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
     register: hostnames
 
-  - name: test
-    debug:
-      msg: "An item: {{ item }}"
+  - name: scan hosts
+    shell: sh ~/vulsctl/docker/scan.sh {{ item }}
     with_items: "{{ hostnames.stdout_lines }}"
 ... 
