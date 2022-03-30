@@ -1,0 +1,9 @@
+---
+# The main magento playbook
+# Mischa van den Burg & Gino Kok
+
+- name: Vuls setup
+  hosts: all
+
+  roles:
+    - role: docker_installer
