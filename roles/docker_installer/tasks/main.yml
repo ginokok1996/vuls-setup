@@ -59,11 +59,4 @@
   - name: reset ssh connection to allow user changes to affect the user
     meta:
       reset_connection
-
-  - name: show docker containers
-    shell: "docker container ls"
-    register: containers
-
-  # Prints out the installed docker version
-  - debug: var=containers.stdout
 ...
