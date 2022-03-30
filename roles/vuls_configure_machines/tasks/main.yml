@@ -11,5 +11,7 @@
     register: hostnames
 
   - name: test
-    debug: var=hostnames
+    debug:
+      msg: "An item: {{ item }}"
+    with_items: "{{ hostnames }}"
 ... 
