@@ -13,4 +13,8 @@
     git:
       repo: "https://github.com/vulsio/vulsctl.git"
       dest: $HOME/vulsctl
+
+  - name: update scan.sh
+    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulctl/docker/scan.sh
+
 ...
