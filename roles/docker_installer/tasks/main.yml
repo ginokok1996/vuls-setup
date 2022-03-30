@@ -3,19 +3,37 @@
 
   # Make sure we have the latest yum utils version
   - name: Install required packages
-    package:
+    apt:
       name: 
-        - python3
-        - python3-pip
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
       state: latest
     become: true
 
-# You can use shell to run other executables to perform actions inline
-  - name: Install docker
+    # Add docker gpg key
+  - name: Add docker gpg key
+    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+
+    # Set up stable docker repository
+  - name: Set up stable docker repository
     shell: |
-      curl -fsSL https://get.docker.com -o /tmp/get-docker.sh \
-      sudo sh /tmp/get-docker.sh \
-      rm -r /tmp/get-docker.sh
+      echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    # Install docker
+  - name: Install docker
+    apt:
+      name: 
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+      update_cache: yes
+      state: latest
+    become: true
 
   # Retrieves the docker version
   - name: get docker version
