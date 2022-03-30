@@ -1,0 +1,8 @@
+---
+
+  # Copy the hosts to the config file
+  - name: Copy hosts to config file
+    copy: 
+      content: "{{ hosts }}"
+      dest: $HOME/vulsctl/docker/conf.toml
+...

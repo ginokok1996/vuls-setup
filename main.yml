@@ -16,3 +16,8 @@
       tags:
         - vuls-install
         - global-instal
+
+    - role: vuls_configure_machines
+      tags:
+        - configure-machines
+        - global-instal
