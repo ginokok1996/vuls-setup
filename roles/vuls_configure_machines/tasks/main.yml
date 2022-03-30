@@ -11,5 +11,5 @@
     register: hostnames
 
   - name: test
-    debug: hostnames
+    debug: var=hostnames
 ... 
