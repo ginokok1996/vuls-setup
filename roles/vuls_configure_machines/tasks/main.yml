@@ -14,7 +14,7 @@
     command: ~/vulsctl/docker/oval.sh --ubuntu
 
   - name: test
-    debug: {{ hostnames.stdout_lines | join(' ') }}
+    debug: "{{ hostnames.stdout_lines | join(' ') }}"
 
   # - name: scan hosts
   #   shell: sh ~/vulsctl/docker/scan.sh {{ hostnames.stdout_lines }}
