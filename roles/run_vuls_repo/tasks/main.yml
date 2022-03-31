@@ -8,7 +8,7 @@
     # create the vuls repo container
     - name: Create a vuls repo container
       docker_container:
-        name: db
+        name: vulsrepo
         image: 'ishidaco/vulsrepo'
         ports: 
           - '5111:5111'
