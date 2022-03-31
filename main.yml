@@ -9,15 +9,18 @@
     - role: docker_installer
       tags:
         - docker-install
-        - global-install
 
     # Role for installing vuls
     - role: vuls_install
       tags:
         - vuls-install
-        - global-instal
 
     # Role for running vuls
     - role: run_vuls
       tags:
         - run-vuls
+
+    # Role for running vuls repo container
+    - role: run_vuls_repo
+      tags:
+        - run-vuls-repo
