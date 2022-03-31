@@ -15,7 +15,7 @@
     with_items: "{{ hostnames.stdout_lines }}"
 
   - name: Fetch OVAL DB
-    shell: source ~/vulsctl/docker/oval.sh --ubuntu
+    command: ~/vulsctl/docker/oval.sh --ubuntu
 
   - name: Create report
     shell: sh ~/vulsctl/docker/report.sh
