@@ -1,21 +1,19 @@
 ---
 
-  # Copy the hosts to the config file
-  - name: Copy hosts to config file
-    copy: 
-      content: "{{ machines }}"
-      dest: $HOME/vulsctl/docker/config.toml
-
+  # Retrieves the hostnames defined in the config file
   - name: retrieve hosts
     shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
     register: hostnames
 
+  # Fetches the OVAL DB used for creating the report
   - name: Fetch OVAL DB
     command: ~/vulsctl/docker/oval.sh --ubuntu
 
+  # Scans the hosts for vulnerabilities
   - name: scan hosts
     shell: sh ~/vulsctl/docker/scan.sh {{ hostnames.stdout_lines | join(' ') }}
 
+  # Creates the vuls reports
   - name: Create report
     command: ~/vulsctl/docker/report.sh
 

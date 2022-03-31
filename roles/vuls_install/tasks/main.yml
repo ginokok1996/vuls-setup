@@ -8,15 +8,23 @@
       state: latest
     become: true
 
-  # Clone the vuls repo
+  # Clone the vuls repo to the home directory
   - name: clone vuls repository
     git:
       repo: "https://github.com/vulsio/vulsctl.git"
       dest: $HOME/vulsctl
       force: yes
 
+  # We do this to remove the $PWD usage in the scripts to set it to the directory where vuls is located.
+  # This ensures that the volume mount is done correctly.
   - name: update scripts
     shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
     with_items: [ 'scan.sh', 'report.sh', 'oval.sh' ]
+
+  # Update the config.toml file to have all the configured machines added
+  - name: Copy machines to the config file
+    copy: 
+      content: "{{ machines }}"
+      dest: $HOME/vulsctl/docker/config.toml
 
 ...

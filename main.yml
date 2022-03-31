@@ -17,7 +17,6 @@
         - vuls-install
         - global-instal
 
-    - role: vuls_configure_machines
+    - role: run_vuls
       tags:
-        - configure-machines
-        - global-instal
+        - run-vuls
