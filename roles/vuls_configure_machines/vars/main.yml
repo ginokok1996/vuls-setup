@@ -2,13 +2,13 @@
 
 machines: |
   [servers]
-  [servers.ubuntu]
+  [servers.scan]
   host        = "52.233.156.126"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"
-  [servers.ubuntu2]
-  host        = "52.233.156.126"
+  [servers.scan2]
+  host        = "20.229.72.109"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"
