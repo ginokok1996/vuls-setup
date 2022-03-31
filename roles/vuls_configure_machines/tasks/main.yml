@@ -10,14 +10,10 @@
     shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
     register: hostnames
 
-  - name: scan hosts
-    shell: sh ~/vulsctl/docker/scan.sh {{ item }}
-    with_items: "{{ hostnames.stdout_lines }}"
-
   - name: Fetch OVAL DB
     command: ~/vulsctl/docker/oval.sh --ubuntu
 
-  - name: Create report
-    shell: sh ~/vulsctl/docker/report.sh
+  - include_tasks: create_report.yml
+    loop: "{{ hostnames.stdout_lines }}"
 
 ... 

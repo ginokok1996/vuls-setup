@@ -1,0 +1,7 @@
+---
+
+- name: scan hosts
+  shell: sh ~/vulsctl/docker/scan.sh {{ item }}
+
+- name: Create report
+  command: ~/vulsctl/docker/report.sh
