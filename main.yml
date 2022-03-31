@@ -1,22 +1,23 @@
 ---
-# The main magento playbook
-# Mischa van den Burg & Gino Kok
 
 - name: Vuls setup
   hosts: all
 
   roles:
-
+    
+    # Role for installing docker
     - role: docker_installer
       tags:
         - docker-install
         - global-install
 
+    # Role for installing vuls
     - role: vuls_install
       tags:
         - vuls-install
         - global-instal
 
+    # Role for running vuls
     - role: run_vuls
       tags:
         - run-vuls
