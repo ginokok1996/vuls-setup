@@ -1,7 +1,10 @@
----
+  ---
 
 - name: scan hosts
   shell: sh ~/vulsctl/docker/scan.sh {{ item }}
+  with_items: "{{ hostnames.stdout_lines }}"
+
+
 
 - name: Create report
   command: ~/vulsctl/docker/report.sh
