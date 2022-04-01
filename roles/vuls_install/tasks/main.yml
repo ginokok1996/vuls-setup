@@ -17,9 +17,9 @@
 
   # We do this to remove the $PWD usage in the scripts to set it to the directory where vuls is located.
   # This ensures that the volume mount is done correctly.
-  - name: update scripts
+  - name: edit scripts
     shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
-    with_items: [ 'scan.sh', 'report.sh', 'oval.sh' ]
+    with_items: ['scan.sh','report.sh','oval.sh']
 
   # Create the results folder & make it readable + executable
   - name: create results folder
@@ -29,8 +29,8 @@
       mode: '0755'
 
   # Update the config.toml file to have all the configured machines added
-  - name: Copy machines to the config file
-    copy: 
+  - name: add machines to the config file
+    copy:
       content: "{{ machines }}"
       dest: $HOME/vulsctl/docker/config.toml
 
