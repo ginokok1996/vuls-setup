@@ -1,59 +1,61 @@
 ---
-  # Make sure we have the latest required packages
-  - name: Install required packages
-    apt:
-      name: 
-        - ca-certificates
-        - curl
-        - gnupg
-        - lsb-release
-      state: latest
-    become: true
+# Make sure we have the latest required packages
+- name: Install required packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+  become: true
 
-  # Add docker gpg key
-  - name: Add docker gpg key
-    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --batch --yes -o /usr/share/keyrings/docker-archive-keyring.gpg"
+# Add docker gpg key
+- name: Add docker gpg key
+  ansible.builtin.shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+   | sudo gpg --dearmor --batch --yes -o /usr/share/keyrings/docker-archive-keyring.gpg"
 
-  # Set up the stable docker repository
-  - name: Set up stable docker repository
-    shell: |
-      echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Set up the stable docker repository
+- name: Set up stable docker repository
+  ansible.builtin.shell: |
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+    https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-  # Install docker + dependencies
-  - name: Install docker
-    apt:
-      name: 
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-      update_cache: 
-      state: latest
-    become: true
-  
-  # Starts the docker service and enables docker on boot
-  - name: Start Docker service
-    service:
-      name: docker
-      state: started
-      enabled: yes
+# Install docker + dependencies
+- name: Install docker
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    update_cache:
+    state: present
+  become: true
 
-  # Install the Docker SDK module      
-  - name: Install Docker SDK
-    pip:
-      name: docker
+# Starts the docker service and enables docker on boot
+- name: Start Docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
 
-  # Add user to the docker group
-  - name: Add user to the docker group
-    become: true
-    user:
-        name: "ubuntu"
-        groups: docker
-        append: yes
+# Install the Docker SDK module
+- name: Install Docker SDK
+  ansible.builtin.pip:
+    name: docker
 
-  # Reset ssh connection to be able to use the group
-  - name: reset ssh connection to allow user changes to affect the user
-    meta:
-      reset_connection
+# Add user to the docker group
+- name: Add user to the docker group
+  become: true
+  ansible.builtin.user:
+    name: "ubuntu"
+    groups: docker
+    append: yes
+
+# Reset ssh connection to be able to use the group
+- name: reset ssh connection to allow user changes to affect the user
+  ansible.builtin.meta:
+    reset_connection
 ...

@@ -1,22 +1,22 @@
 ---
 
-    # create the vuls network
-    - name: Create vuls network
-      docker_network:
-        name: vuls
+# create the vuls network
+- name: Create vuls network
+  docker_network:
+    name: vuls
 
-    # create the vuls repo container
-    - name: Create a vuls repo container
-      docker_container:
-        name: vulsrepo
-        image: 'ishidaco/vulsrepo'
-        ports: 
-          - '5111:5111'
-        hostname: "repo.vuls.docker"
-        volumes:
-          - ~/vulsctl/docker/results:/vuls/results/
-        networks:
-          - name: vuls
-            aliases:
-              - "repo.vuls.docker"
-... 
+# create the vuls repo container
+- name: Create a vuls repo container
+  docker_container:
+    name: vulsrepo
+    image: 'ishidaco/vulsrepo'
+    ports:
+      - '5111:5111'
+    hostname: "repo.vuls.docker"
+    volumes:
+      - ~/vulsctl/docker/results:/vuls/results/
+    networks:
+      - name: vuls
+        aliases:
+          - "repo.vuls.docker"
+...

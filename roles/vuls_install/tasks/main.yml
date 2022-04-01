@@ -1,37 +1,30 @@
 ---
 
-  # Make sure we have git installed
-  - name: Install git
-    apt:
-      name: 
-        - git
-      state: latest
-    become: true
+# Make sure we have git installed
+- name: Install git
+  ansible.builtin.apt:
+    name:
+      - git
+  become: true
 
-  # Clone the vuls repo to the home directory
-  - name: clone vuls repository
-    git:
-      repo: "https://github.com/vulsio/vulsctl.git"
-      dest: $HOME/vulsctl
-      force: yes
+# Clone the vuls repo to the home directory
+- name: clone vuls repository
+  ansible.builtin.git:
+    repo: "https://github.com/vulsio/vulsctl.git"
+    dest: $HOME/vulsctl
+    force: yes
+    version: master
 
-  # We do this to remove the $PWD usage in the scripts to set it to the directory where vuls is located.
-  # This ensures that the volume mount is done correctly.
-  - name: edit scripts
-    shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
-    with_items: ['scan.sh','report.sh','oval.sh']
+# We do this to remove the $PWD usage in the scripts to set it to the directory where vuls is located.
+# This ensures that the volume mount is done correctly.
+- name: edit scripts
+  ansible.builtin.shell: sed -i 's/\$PWD/\~\/vulsctl\/docker/' ~/vulsctl/docker/{{ item }}
+  with_items: ['scan.sh', 'report.sh', 'oval.sh']
 
-  # Create the results folder & make it readable + executable
-  - name: create results folder
-    file:
-      path: ~/vulsctl/docker/results
-      state: directory
-      mode: '0755'
-
-  # Update the config.toml file to have all the configured machines added
-  - name: add machines to the config file
-    copy:
-      content: "{{ machines }}"
-      dest: $HOME/vulsctl/docker/config.toml
-
+# Update the config.toml file to have all the configured machines added
+- name: add machines to the config file
+  ansible.builtin.copy:
+    content: "{{ machines }}"
+    dest: $HOME/vulsctl/docker/config.toml
+    mode: '0700'
 ...

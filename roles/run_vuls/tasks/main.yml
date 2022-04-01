@@ -1,20 +1,20 @@
 ---
 
-  # Retrieves the hostnames defined in the config file
-  - name: retrieve hosts
-    shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
-    register: hostnames
+# Retrieves the hostnames defined in the config file
+- name: retrieve hosts
+  ansible.builtin.shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
+  register: hostnames
 
-  # Fetches the OVAL DB used for creating the report
-  - name: Fetch OVAL DB
-    command: ~/vulsctl/docker/oval.sh --ubuntu
+# Fetches the OVAL DB used for creating the report
+- name: Fetch OVAL DB
+  ansible.builtin.command: ~/vulsctl/docker/oval.sh --ubuntu
 
-  # Scans the hosts for vulnerabilities
-  - name: scan hosts
-    shell: sh ~/vulsctl/docker/scan.sh {{ hostnames.stdout_lines | join(' ') }}
+# Scans the hosts for vulnerabilities
+- name: scan hosts
+  ansible.builtin.command: ~/vulsctl/docker/scan.sh {{ hostnames.stdout_lines | join(' ') }}
 
-  # Creates the vuls reports
-  - name: Create report
-    command: ~/vulsctl/docker/report.sh
+# Creates the vuls reports
+- name: Create report
+  ansible.builtin.command: ~/vulsctl/docker/report.sh
 
-... 
+...
