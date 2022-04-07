@@ -14,6 +14,11 @@
       tags:
         - vuls-install
 
+    # Role for adding known hosts
+    - role: add_known_hosts
+      tags:
+        - known-hosts
+
     # Role for running vuls
     - role: run_vuls
       tags:

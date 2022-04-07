@@ -1,0 +1,22 @@
+---
+
+# Retrieve the hostnames from the config file
+- name: retrieve hosts
+  ansible.builtin.shell: grep "host" ~/vulsctl/docker/config.toml | cut -d '"' -f 2
+  register: ssh_hostnames
+
+# Retrieves the hostnames defined in the config file
+- name: scan machines for ssh public key
+  ansible.builtin.shell: "ssh-keyscan {{ item }} | sort -r | grep {{ item }} -m 1"
+  register: ssh_known_hosts_results
+  with_items: "{{ ssh_hostnames.stdout_lines }}"
+
+# Add the machines to the known hosts files
+- name: Add the machines to the known hosts
+  ansible.builtin.known_hosts:
+    name: "{{ item.item }}"
+    key: "{{ item.stdout }}"
+    path: ~/.ssh/known_hosts
+    state: present
+  with_items: "{{ ssh_known_hosts_results.results }}"
+...

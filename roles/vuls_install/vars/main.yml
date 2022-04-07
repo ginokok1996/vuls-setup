@@ -3,12 +3,12 @@
 machines: |
   [servers]
   [servers.scan]
-  host        = "52.233.156.126"
+  host        = "20.126.110.219"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"
   [servers.scan2]
-  host        = "20.229.72.109"
+  host        = "40.114.203.37"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"

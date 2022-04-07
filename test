@@ -1,0 +1,11 @@
+  [servers]
+  [servers.scan]
+  host        = "20.224.138.32"
+  port        = "22"
+  user        = "ubuntu"
+  keyPath     = "/root/.ssh/id_rsa"
+  [servers.scan2]
+  host        = "13.95.204.156"
+  port        = "22"
+  user        = "ubuntu"
+  keyPath     = "/root/.ssh/id_rsa"
