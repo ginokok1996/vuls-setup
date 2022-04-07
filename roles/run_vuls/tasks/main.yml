@@ -2,7 +2,7 @@
 
 # Retrieves the hostnames defined in the config file
 - name: retrieve hosts
-  ansible.builtin.shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/'
+  ansible.builtin.shell: grep "servers\." ~/vulsctl/docker/config.toml | sed -E 's/\[servers\.(.*)\]/\1/;/portscan/d' 
   register: hostnames
 
 # Fetches the OVAL DB used for creating the report

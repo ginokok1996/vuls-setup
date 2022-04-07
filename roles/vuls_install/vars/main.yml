@@ -2,13 +2,17 @@
 
 machines: |
   [servers]
+
   [servers.scan]
   host        = "20.126.110.219"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"
+  scanModules = ["ospkg", "port"]
+
   [servers.scan2]
   host        = "40.114.203.37"
   port        = "22"
   user        = "ubuntu"
   keyPath     = "/root/.ssh/id_rsa"
+  scanModules = ["ospkg", "port"]
